@@ -11,7 +11,7 @@ namespace oms_web.Controller
     [ApiController]
     [Authorize]
     [Route("api/v1/user")]
-    public class UserController(IUserService userService, IOptions<JwtSettings> options)
+    public sealed class UserController(IUserService userService, IOptions<JwtSettings> options)
         : ControllerBase
     {
         private readonly IUserService _userService = userService;
