@@ -5,7 +5,7 @@ using oms_core.Errors;
 
 namespace oms_core.Middleware
 {
-    public class HttpMiddleware(ILogger<HttpMiddleware> logger, RequestDelegate next)
+    public sealed class HttpMiddleware(ILogger<HttpMiddleware> logger, RequestDelegate next)
     {
         private readonly ILogger<HttpMiddleware> _logger = logger;
         private readonly RequestDelegate _next = next;
