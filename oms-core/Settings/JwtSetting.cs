@@ -1,0 +1,11 @@
+namespace oms_core.Settings
+{
+    public sealed class JwtSettings
+    {
+        public required string TokenName { get; set; }
+        public required string SecretKey { get; set; }
+        public required string Issuer { get; set; }
+        public required string Audience { get; set; }
+        public int ExpiryHours { get; set; } = 24;
+    }
+}
