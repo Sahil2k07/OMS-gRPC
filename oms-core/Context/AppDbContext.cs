@@ -13,6 +13,10 @@ namespace oms_core.Context
 
         public DbSet<Profile> Profiles { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -20,6 +24,13 @@ namespace oms_core.Context
                 var connectionString = _dbConfig?.GetConnectionString();
                 optionsBuilder.UseSqlServer(connectionString);
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>().Property(o => o.Status).HasConversion<string>();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
