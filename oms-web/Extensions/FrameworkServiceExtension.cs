@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using oms_core.Context;
+using oms_core.Interface.Context;
 
 namespace oms_web.Extensions
 {
@@ -38,6 +39,7 @@ namespace oms_web.Extensions
                 );
 
             services.AddDbContext<AppDbContext>();
+            services.AddSingleton<IGrpcContext, GrpcContext>();
 
             return services;
         }

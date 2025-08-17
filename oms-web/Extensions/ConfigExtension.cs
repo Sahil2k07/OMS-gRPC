@@ -11,9 +11,11 @@ namespace oms_web.Extensions
         {
             var dbConfigs = configs.GetSection("DbSettings");
             var jwtSettingsSection = configs.GetSection("JwtSettings");
+            var grpcSettingsSection = configs.GetSection("GrpcSettings");
 
             services.Configure<DbSettings>(dbConfigs);
             services.Configure<JwtSettings>(jwtSettingsSection);
+            services.Configure<GrpcSettings>(grpcSettingsSection);
 
             return services;
         }

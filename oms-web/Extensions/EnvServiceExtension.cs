@@ -13,10 +13,12 @@ namespace oms_web.Extensions
             if (env.IsDevelopment())
             {
                 services.AddSingleton<IDbConfig, DbDevConfig>();
+                services.AddSingleton<IGrpcConfig, GrpcDevConfig>();
             }
             else
             {
                 services.AddSingleton<IDbConfig, DbProdConfig>();
+                services.AddSingleton<IGrpcConfig, GrpcProdConfig>();
             }
 
             return services;
