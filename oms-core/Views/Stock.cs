@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace oms_core.Views
 {
     public sealed class StockItemsPayload
@@ -10,15 +12,27 @@ namespace oms_core.Views
 
         public string? GroupName { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "PageNum must be a positive integer.")]
         public required int PageNum { get; set; }
 
+        [Required]
+        [Range(1, 100, ErrorMessage = "PageSize must be between 1 and 100.")]
         public required int PageSize { get; set; }
     }
 
     public sealed class StockActionRequest
     {
+        [Required]
+        [StringLength(
+            50,
+            MinimumLength = 1,
+            ErrorMessage = "Code must be between 1 and 50 characters."
+        )]
         public required string Code { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive integer.")]
         public required int Quantity { get; set; }
     }
 
