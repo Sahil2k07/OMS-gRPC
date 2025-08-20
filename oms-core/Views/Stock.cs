@@ -15,7 +15,7 @@ namespace oms_core.Views
         public required int PageSize { get; set; }
     }
 
-    public sealed class StockInquiryRequest
+    public sealed class StockActionRequest
     {
         public required string Code { get; set; }
 
@@ -47,5 +47,14 @@ namespace oms_core.Views
         public required bool Available { get; set; }
 
         public float? AvailableQuantity { get; set; }
+    }
+
+    public sealed class StockConsumptionReport
+    {
+        public required string ItemCode { get; set; }
+
+        public required bool Success { get; set; }
+
+        public required string Message { get; set; }
     }
 }

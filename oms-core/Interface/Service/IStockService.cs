@@ -6,6 +6,8 @@ namespace oms_core.Interface.Service
     {
         Task<StockItemsPagedResult> ListStockItems(StockItemsPayload req);
 
-        Task<List<StockInquiryResponse>> CheckStockAvailability(List<StockInquiryRequest> req);
+        Task<List<StockInquiryResponse>> CheckStockAvailability(List<StockActionRequest> req);
+
+        Task<List<StockConsumptionReport>> ConsumeStock(List<StockActionRequest> req);
     }
 }

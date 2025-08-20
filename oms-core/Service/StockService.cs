@@ -1,3 +1,4 @@
+using oms_core.Errors;
 using oms_core.Interface.Context;
 using oms_core.Interface.Service;
 using oms_core.Views;
@@ -43,7 +44,7 @@ namespace oms_core.Service
         }
 
         public async Task<List<StockInquiryResponse>> CheckStockAvailability(
-            List<StockInquiryRequest> req
+            List<StockActionRequest> req
         )
         {
             StockAvailabilityRequest clientReq = new();
@@ -62,6 +63,35 @@ namespace oms_core.Service
                     AvailableQuantity = i.AvailableQuantity,
                     ItemCode = i.Code,
                     ItemName = i.Name,
+                })
+                .ToList();
+
+            return response;
+        }
+
+        public async Task<List<StockConsumptionReport>> ConsumeStock(List<StockActionRequest> req)
+        {
+            ConsumeStockRequest clientReq = new();
+            clientReq.Items.AddRange(
+                req.Select(r => new StockItemRequest { Code = r.Code, Quantity = r.Quantity })
+            );
+
+            StockConsumptionResponse clientResponse = await _client.ConsumeStockAsync(clientReq);
+
+            var response = clientResponse
+                .Items.Select(i =>
+                {
+                    if (!i.Success)
+                    {
+                        throw new ValidationException($"{i.Code} - {i.Message}");
+                    }
+
+                    return new StockConsumptionReport
+                    {
+                        ItemCode = i.Code,
+                        Message = i.Message,
+                        Success = i.Success,
+                    };
                 })
                 .ToList();
 

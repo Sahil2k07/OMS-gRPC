@@ -20,10 +20,16 @@ namespace oms_web.Controller
 
         [HttpPost("enquire")]
         public async Task<List<StockInquiryResponse>> CheckStockAvailability(
-            List<StockInquiryRequest> req
+            List<StockActionRequest> req
         )
         {
             return await _stockService.CheckStockAvailability(req);
+        }
+
+        [HttpPut]
+        public async Task<List<StockConsumptionReport>> ConsumeStock(List<StockActionRequest> req)
+        {
+            return await _stockService.ConsumeStock(req);
         }
     }
 }
