@@ -126,19 +126,13 @@ dotnet tool install --global dotnet-grpc
    dotnet build
    ```
 
-9. Run the migration:
+9. Run the app in Development mode:
 
    ```bash
-    dotnet ef database update
+   dotnet run
    ```
 
-10. Run the app in Development mode:
-
-    ```bash
-    dotnet run
-    ```
-
-11. Additionally you can make the Release build of the project using the command
+10. Additionally you can make the Release build of the project using the command
 
     ```bash
     dotnet publish -c Release
