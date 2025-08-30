@@ -6,17 +6,25 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using oms_core.Entity;
 using oms_core.Enum;
+using oms_core.Errors;
+using oms_core.Interface.Repository;
 using oms_core.Interface.Service;
 using oms_core.Settings;
 using static BCrypt.Net.BCrypt;
 
 namespace oms_core.Service
 {
-    public sealed class AuthService(IOptions<JwtSettings> options, IHttpContextAccessor httpContext)
-        : IAuthService
+    public sealed class AuthService(
+        IOptions<JwtSettings> options,
+        IHttpContextAccessor httpContext,
+        IUserRepository userRepository
+    ) : IAuthService
     {
         private readonly JwtSettings _jwtSettings = options.Value;
+
         private readonly IHttpContextAccessor _httpContext = httpContext;
+
+        private readonly IUserRepository _userRepository = userRepository;
 
         public string GenerateHash(string plainPassword)
         {
@@ -88,6 +96,17 @@ namespace oms_core.Service
             }
 
             return roles;
+        }
+
+        public async Task<User> GetUser()
+        {
+            int id = GetUserID();
+
+            User user =
+                await _userRepository.GetUserFromID(id)
+                ?? throw new NotFoundException("User data was not found");
+
+            return user;
         }
     }
 }

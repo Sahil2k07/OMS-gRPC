@@ -15,6 +15,8 @@ namespace oms_core.Interface.Service
 
         int GetUserID();
 
+        Task<User> GetUser();
+
         HashSet<Roles> GetRoles();
     }
 }

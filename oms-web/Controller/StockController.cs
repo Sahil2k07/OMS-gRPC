@@ -13,21 +13,23 @@ namespace oms_web.Controller
         private readonly IStockService _stockService = stockService;
 
         [HttpPost]
-        public async Task<StockItemsPagedResult> ListStockItems(StockItemsPayload req)
+        public async Task<StockItemsPagedResult> ListStockItems([FromBody] StockItemsPayload req)
         {
             return await _stockService.ListStockItems(req);
         }
 
         [HttpPost("enquire")]
         public async Task<List<StockInquiryResponse>> CheckStockAvailability(
-            List<StockActionRequest> req
+            [FromBody] List<StockActionRequest> req
         )
         {
             return await _stockService.CheckStockAvailability(req);
         }
 
         [HttpPut]
-        public async Task<List<StockConsumptionReport>> ConsumeStock(List<StockActionRequest> req)
+        public async Task<List<StockConsumptionReport>> ConsumeStock(
+            [FromBody] List<StockActionRequest> req
+        )
         {
             return await _stockService.ConsumeStock(req);
         }

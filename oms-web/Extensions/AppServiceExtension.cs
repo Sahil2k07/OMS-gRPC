@@ -13,6 +13,8 @@ namespace oms_web.Extensions
 
             services.AddScoped<IStockService, StockService>();
 
+            services.AddScoped<IOrderService, OrderService>();
+
             return services;
         }
     }
