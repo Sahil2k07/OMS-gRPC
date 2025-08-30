@@ -129,7 +129,7 @@ dotnet tool install --global dotnet-grpc
 9. Run the migration:
 
    ```bash
-
+    dotnet ef database update
    ```
 
 10. Run the app in Development mode:
