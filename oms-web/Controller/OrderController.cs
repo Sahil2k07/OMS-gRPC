@@ -17,5 +17,13 @@ namespace oms_web.Controller
         {
             await _orderService.CreateOrder(req);
         }
+
+        [HttpPost("list")]
+        public async Task<PaginatedResponse<OrderResponse>> ListOrders(
+            PaginatedRequest<ListOrdersRequest> req
+        )
+        {
+            return await _orderService.ListOrders(req);
+        }
     }
 }

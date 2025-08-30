@@ -67,5 +67,14 @@ namespace oms_core.Service
 
             await _stockService.ConsumeStock(payloads);
         }
+
+        public async Task<PaginatedResponse<OrderResponse>> ListOrders(
+            PaginatedRequest<ListOrdersRequest> req
+        )
+        {
+            (int count, List<OrderResponse> list) = await _orderRepository.ListOrders(req);
+
+            return new PaginatedResponse<OrderResponse>(count, list);
+        }
     }
 }
